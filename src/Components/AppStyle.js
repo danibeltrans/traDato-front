@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 const AppStyle = styled.div`
+  .content{
+    overflow: auto;
+    height: calc(100vh - 60px);
+  }
   text-align: center; 
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

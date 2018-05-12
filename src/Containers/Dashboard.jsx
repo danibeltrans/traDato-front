@@ -9,7 +9,7 @@ const Dashboard = () => (
     <section>
       <SideBar />
       <div className="content">
-        content
+        content <br />
       </div>
     </section>
   </AppStyle>
