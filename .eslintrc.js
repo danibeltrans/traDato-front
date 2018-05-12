@@ -35,7 +35,11 @@ module.exports = {
     }
     ],
     "no-console": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "jsx-a11y/anchor-is-valid": [ "error", {
+        "components": [ "Link" ],
+        "specialLink": [ "to" ],
+      }]
 },
 "env": {
     "browser": true,
