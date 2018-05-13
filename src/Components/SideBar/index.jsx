@@ -33,11 +33,11 @@ class SideBar extends Component {
               <span>Reports</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="/admin/batch-upload">
+          {/* <Menu.Item key="/admin/batch-upload">
             <Link to="/admin/batch-upload">
               <span>Batch Upload</span>
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="/admin/account-settings">
             <Link to="/admin/account-settings">
               <span>Account Settings</span>

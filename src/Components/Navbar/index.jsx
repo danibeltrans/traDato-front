@@ -18,18 +18,17 @@ class NavBar extends Component {
         </div>
         <section>
           <div>
-            <Select defaultValue="lucy" >
-              <Select.Option value="jack">Jack</Select.Option>
-              <Select.Option value="lucy">Lucy</Select.Option>
-              <Select.Option value="disabled" disabled>Disabled</Select.Option>
-              <Select.Option value="Yiminghe">yiminghe</Select.Option>
+            <Select defaultValue="Mexico" >
+              <Select.Option value="Mexico">Mexico</Select.Option>
+              <Select.Option value="Colombia">Colombia</Select.Option>
+              <Select.Option value="USA">Estados Unidos</Select.Option>
             </Select>
           </div>
           <div>
             {DisplayName}
           </div>
           <div>
-            <Icon type="logout" /> Sign up
+            <Icon type="logout" /> Sign out
           </div>
         </section>
       </NavBarStyle>
