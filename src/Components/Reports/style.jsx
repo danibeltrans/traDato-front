@@ -6,6 +6,7 @@ padding: 0 20px;
   max-width: 1000px;
   .ant-table-thead > tr > th{
     background: white;
+    text-transform: capitalize;
   }
 }
 `;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Select, Icon } from 'antd';
 import { connect } from 'react-redux';
+import logo from 'images/logo.png';
 import NavBarStyle from './styles';
 
 class NavBar extends Component {
@@ -14,7 +15,7 @@ class NavBar extends Component {
     return (
       <NavBarStyle>
         <div>
-          Img
+          <img src={logo} alt="logo" />
         </div>
         <section>
           <div>

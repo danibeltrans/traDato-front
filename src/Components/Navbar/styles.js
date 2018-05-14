@@ -6,6 +6,9 @@ justify-content: space-between;
 height: 60px;
 align-items: center;
 padding: 0 20px;
+img{
+  height: 40px;
+}
 > section{
   display: flex;
   align-items: center;

@@ -15,7 +15,7 @@ width: 250px;
     height: 80px;
     width: 80px;
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
     &.passed{
       background: lawngreen;
     }

@@ -23,6 +23,9 @@ padding: 0 10px;
     width: 210px;
     outline: 0;
   }
+  .ant-input:focus, .ant-select-selection:focus, .ant-select-selection:active{
+    box-shadow: none;
+  }
   button{
     margin-left: 15px;
   }
