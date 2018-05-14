@@ -3,13 +3,13 @@ import AppStyle from 'Components/AppStyle';
 import SideBar from 'Components/SideBar';
 import Navbar from 'Components/Navbar';
 
-const Dashboard = () => (
+const Dashboard = ({ children }) => (
   <AppStyle className="Dashboard">
     <Navbar />
     <section>
       <SideBar />
       <div className="content">
-        content <br />
+        {children}
       </div>
     </section>
   </AppStyle>
