@@ -15,3 +15,11 @@
 
 * “eslint”: https://github.com/eslint/eslint
 * “eslint-config-airbnb”: https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb. 
+
+## Data test.
+
+* 'CR1234568',
+* 'CR0932355',
+* 'CR87320782',
+* 'CT628812832',
+* 'ERROR',
