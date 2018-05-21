@@ -11,8 +11,8 @@ class Card extends Component {
     return (
       <CardStyle>
         <div className="cardHeader">
-          <div className={`passDiv ${data.passed ? 'passed' : 'failed'}`}>
-            { data.passed ? 'passed' : 'failed' }
+          <div className={`passDiv ${data.statusPerson ? 'passed' : 'failed'}`}>
+            { data.statusPerson ? 'passed' : 'failed' }
           </div>
           <div>
             <p>Convicted</p>
@@ -20,7 +20,7 @@ class Card extends Component {
           </div>
         </div>
         <div className="cardContent">
-          <p>Proccessed {data.proccessed} of {data.proccessed}</p>
+          <p>Proccessed {data.proccessed || '2'} of {data.proccessed || '2'}</p>
         </div>
       </CardStyle>
     );
