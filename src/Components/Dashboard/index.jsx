@@ -9,41 +9,24 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      endpoints: [{
-        title: 'Penal',
-        occurrence: 'CR1234568',
-      }, {
-        title: 'Penal',
-        occurrence: 'CR0932355',
-      }, {
-        title: 'Penal',
-        occurrence: 'CR87320782',
-      }, {
-        title: 'Penal',
-        occurrence: 'CT628812832',
-      }, {
-        title: 'Penal',
-        occurrence: 'ERROR',
+      Data: [{
+        name: 'Procaduria',
+        statusPerson: true,
+        num: 0,
+        proccessed: 17,
+        response: [{
+          title: 'Nombre', data: 'Emil Jose',
+        }],
       }],
-      Data: [
-        {
-          name: 'Procaduria',
-          statusPerson: true,
-          num: 0,
-          proccessed: 17,
-          response: [{
-            title: 'Nombre', data: 'Emil Jose',
-          }],
-        },
-      ],
-      judicialResult: null,
       occurrence: [],
+      judicialResult: null,
     };
-    this.search = this.search.bind(this);
+    this.searchById = this.searchById.bind(this);
   }
   searchById() {
     const { API_URL } = constant;
-    const { occurrence } = this.state;
+    // judicialResult
+    const { occurrence, Data = {} } = this.state;
     const config = {
       headers: {
         Accept: 'application/json',
@@ -54,39 +37,16 @@ class Dashboard extends Component {
     fetch(url, config)
       .then(resp => resp.json())
       .then((response) => {
-        this.setState({ judicialResult2: response });
+        Data[0].response[0].data = response.name || 'Emil Hernandez';
+        this.setState({ judicialResult: response, Data });
         return response;
       })
       .catch((err) => {
         console.log(err);
       });
   }
-  search() {
-    const { endpoints } = this.state;
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    };
-    const { API_URL } = constant;
-    endpoints.map((item, index) => {
-      const url = `${API_URL}mock/query/${item.occurrence}`;
-      return fetch(url, config)
-        .then(resp => resp.json())
-        .then((response) => {
-          const { judicialResult } = this.state;
-          judicialResult[index] = response;
-          this.setState({ judicialResult });
-          return response;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  }
   render() {
-    const { Data, judicialResult2 } = this.state;
+    const { Data, judicialResult } = this.state;
     return (
       <DashboardStyle>
         <div className="searchInputs">
@@ -96,24 +56,24 @@ class Dashboard extends Component {
             <Select.Option value="3">Pasaporte</Select.Option>
           </Select>
           <Input onChange={e => this.setState({ occurrence: e.target.value })} placeholder="Document" />
-          <Button onClick={() => { this.searchById(); }} type="primary" >Search</Button>
+          <Button onClick={this.searchById} type="primary" >Search</Button>
         </div>
         <div>
           {
-            judicialResult2 && (
+            judicialResult && (
               <div>
                 <div style={{ float: 'left' }}>{ Data.map(item => <Card data={item} />) }</div>
-                <Card data={judicialResult2} />
+                <Card data={judicialResult} />
               </div>
             )
           }
         </div>
         <div>
           {
-            judicialResult2 && (
+            judicialResult && (
               <div>
                 <div>{ Data.map(item => <InfoData data={item} />) }</div>
-                <InfoData data={judicialResult2} />
+                <InfoData data={judicialResult} />
               </div>
             )
           }
