@@ -97,16 +97,6 @@ class Sidebar extends Component {
           rtlActive && this.props.miniActive && this.state.miniActive,
         [classes.itemTextRTL]: rtlActive
       });
-    const collapseItemText =
-      classes.collapseItemText +
-      " " +
-      cx({
-        [classes.collapseItemTextMini]:
-          this.props.miniActive && this.state.miniActive,
-        [classes.collapseItemTextMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.collapseItemTextRTL]: rtlActive
-      });
     const userWrapperClass =
       classes.user +
       " " +
@@ -118,12 +108,6 @@ class Sidebar extends Component {
       " " +
       cx({
         [classes.caretRTL]: rtlActive
-      });
-    const collapseItemMini =
-      classes.collapseItemMini +
-      " " +
-      cx({
-        [classes.collapseItemMiniRTL]: rtlActive
       });
     const photo =
       classes.photo +

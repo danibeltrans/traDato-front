@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
-// react plugin for creating vector maps
-import { VectorMap } from "react-jvectormap";
 
 // material-ui components
 import withStyles from "material-ui/styles/withStyles";
@@ -28,45 +26,18 @@ import ArtTrack from "@material-ui/icons/ArtTrack";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import ItemGrid from "components/Grid/ItemGrid.jsx";
-import Table from "components/Table/Table.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import StatsCard from "components/Cards/StatsCard.jsx";
 import ChartCard from "components/Cards/ChartCard.jsx";
-import IconCard from "components/Cards/IconCard.jsx";
 import ImagePriceCard from "components/Cards/ImagePriceCard.jsx";
 
 import {
   dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
 } from "variables/charts";
 
 import dashboardStyle from "assets/jss/material-dashboard-pro-react/views/dashboardStyle";
 
 import priceImage1 from "assets/img/card-2.jpeg";
-import priceImage2 from "assets/img/card-3.jpeg";
-import priceImage3 from "assets/img/card-1.jpeg";
-
-const us_flag = require("assets/img/flags/US.png");
-const de_flag = require("assets/img/flags/DE.png");
-const au_flag = require("assets/img/flags/AU.png");
-const gb_flag = require("assets/img/flags/GB.png");
-const ro_flag = require("assets/img/flags/RO.png");
-const br_flag = require("assets/img/flags/BR.png");
-
-var mapData = {
-  AU: 760,
-  BR: 550,
-  CA: 120,
-  DE: 1300,
-  FR: 540,
-  GB: 690,
-  GE: 200,
-  IN: 200,
-  RO: 600,
-  RU: 300,
-  US: 2920
-};
 
 class Dashboard extends React.Component {
   state = {

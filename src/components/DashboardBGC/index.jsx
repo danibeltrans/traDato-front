@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Select, Input, Button } from 'antd';
-import Card from 'Components/Card';
-import InfoData from 'Components/InfoData';
+import Card from 'components/Card';
+import InfoData from 'components/InfoData';
 import constant from 'Constants';
 import DashboardStyle from './style';
 
