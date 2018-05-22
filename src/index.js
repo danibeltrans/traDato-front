@@ -1,19 +1,23 @@
 import React from 'react';
-import { render } from 'react-dom';
-import App from 'Containers/Routes';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import store, { history } from 'Store';
-import 'antd/dist/antd.css';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
+import ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
+import { Router, Route, Switch } from 'react-router-dom';
 
-render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </Provider>,
+import indexRoutes from 'routes/';
+
+import 'assets/scss/material-dashboard-pro-react.css';
+
+const hist = createBrowserHistory();
+
+ReactDOM.render(
+  <Router history={hist}>
+    <Switch>
+      {
+        indexRoutes.map((prop, key) => (
+          <Route path={prop.path} component={prop.component} key={key} />
+        ))
+      }
+    </Switch>
+  </Router>,
   document.getElementById('root'),
 );
-registerServiceWorker();
