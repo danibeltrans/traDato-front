@@ -1,26 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
-import { NavLink } from "react-router-dom";
-import cx from "classnames";
+import PerfectScrollbar from 'perfect-scrollbar';
+import { NavLink } from 'react-router-dom';
+import cx from 'classnames';
 
 // material-ui components
-import withStyles from "material-ui/styles/withStyles";
-import Drawer from "material-ui/Drawer";
-import List from "material-ui/List";
-import ListItem from "material-ui/List/ListItem";
-import ListItemIcon from "material-ui/List/ListItemIcon";
-import ListItemText from "material-ui/List/ListItemText";
-import Hidden from "material-ui/Hidden";
-import Collapse from "material-ui/transitions/Collapse";
+import withStyles from 'material-ui/styles/withStyles';
+import Drawer from 'material-ui/Drawer';
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemIcon from 'material-ui/List/ListItemIcon';
+import ListItemText from 'material-ui/List/ListItemText';
+import Hidden from 'material-ui/Hidden';
+import Collapse from 'material-ui/transitions/Collapse';
 
 // core components
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
+import HeaderLinks from 'components/Header/HeaderLinks.jsx';
 
-import sidebarStyle from "assets/jss/material-dashboard-pro-react/components/sidebarStyle.jsx";
+import sidebarStyle from 'assets/jss/material-dashboard-pro-react/components/sidebarStyle.jsx';
 
-import avatar from "assets/img/faces/avatar.jpg";
+import avatar from 'assets/img/faces/avatar.jpg';
 
 var ps;
 
@@ -54,7 +54,7 @@ class SidebarWrapper extends React.Component {
   }
 }
 
-class Sidebar extends React.Component {
+class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -158,63 +158,6 @@ class Sidebar extends React.Component {
                 className={itemText + " " + classes.userItemText}
               />
             </NavLink>
-            <Collapse in={this.state.openAvatar} unmountOnExit>
-              <List className={classes.list + " " + classes.collapseList}>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      classes.itemLink + " " + classes.userCollapseLinks
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "مع" : "MP"}
-                    </span>
-                    <ListItemText
-                      primary={rtlActive ? "ملفي" : "My Profile"}
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      classes.itemLink + " " + classes.userCollapseLinks
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "هوع" : "EP"}
-                    </span>
-                    <ListItemText
-                      primary={
-                        rtlActive ? "تعديل الملف الشخصي" : "Edit Profile"
-                      }
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="#"
-                    className={
-                      classes.itemLink + " " + classes.userCollapseLinks
-                    }
-                  >
-                    <span className={collapseItemMini}>
-                      {rtlActive ? "و" : "S"}
-                    </span>
-                    <ListItemText
-                      primary={rtlActive ? "إعدادات" : "Settings"}
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-              </List>
-            </Collapse>
           </ListItem>
         </List>
       </div>
