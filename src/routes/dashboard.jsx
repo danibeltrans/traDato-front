@@ -1,7 +1,7 @@
 import Dashboard from 'views/Dashboard/Dashboard';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-// import DashboardBGC from 'components/Dashboard';
-// import Reports from 'components/Reports';
+import DashboardBGC from 'components/DashboardBGC';
+import Reports from 'components/Reports';
 
 
 const dashRoutes = [
@@ -14,7 +14,7 @@ const dashRoutes = [
     path: '/admin/BGC',
     name: 'BGC',
     icon: DashboardIcon,
-    component: Dashboard,
+    component: DashboardBGC,
   }, {
     path: '/admin/database-status',
     name: 'Database',
@@ -24,7 +24,7 @@ const dashRoutes = [
     path: '/admin/reports',
     name: 'Reports',
     icon: DashboardIcon,
-    component: Dashboard,
+    component: Reports,
   }, {
     path: '/admin/batch-upload',
     name: 'Btch Upload',

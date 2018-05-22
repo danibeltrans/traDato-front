@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from 'Containers/Dashboard';
-import DashboardBGC from 'Components/Dashboard';
-import Reports from 'Components/Reports';
+import DashboardBGC from 'components/DashboardBGC';
+import Reports from 'components/Reports';
 
 const Routes = () => (
   <Switch>
