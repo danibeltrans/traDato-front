@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from 'perfect-scrollbar';
 import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
+import logo from 'images/logo.png';
 
 // material-ui components
 import withStyles from 'material-ui/styles/withStyles';
@@ -14,57 +14,26 @@ import ListItemIcon from 'material-ui/List/ListItemIcon';
 import ListItemText from 'material-ui/List/ListItemText';
 import Hidden from 'material-ui/Hidden';
 import Collapse from 'material-ui/transitions/Collapse';
+import sidebarStyle from 'assets/jss/material-dashboard-pro-react/components/sidebarStyle';
 
-// core components
-import HeaderLinks from 'components/Header/HeaderLinks.jsx';
-
-import sidebarStyle from 'assets/jss/material-dashboard-pro-react/components/sidebarStyle.jsx';
-
-import avatar from 'assets/img/faces/avatar.jpg';
-
-var ps;
+import SidebarWrapper from './Wrapper';
 
 // We've created this component so we can have a ref to the wrapper of the links that appears in our sidebar.
 // This was necessary so that we could initialize PerfectScrollbar on the links.
 // There might be something with the Hidden component from material-ui, and we didn't have access to
 // the links, and couldn't initialize the plugin.
-class SidebarWrapper extends React.Component {
-  componentDidMount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(this.refs.sidebarWrapper, {
-        suppressScrollX: true,
-        suppressScrollY: false
-      });
-    }
-  }
-  componentWillUnmount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps.destroy();
-    }
-  }
-  render() {
-    const { className, user, headerLinks, links } = this.props;
-    return (
-      <div className={className} ref="sidebarWrapper">
-        {user}
-        {headerLinks}
-        {links}
-      </div>
-    );
-  }
-}
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       openAvatar: false,
-      openComponents: this.activeRoute("/components"),
-      openForms: this.activeRoute("/forms"),
-      openTables: this.activeRoute("/tables"),
-      openMaps: this.activeRoute("/maps"),
-      openPages: this.activeRoute("-page"),
-      miniActive: true
+      openComponents: this.activeRoute('/components'),
+      openForms: this.activeRoute('/forms'),
+      openTables: this.activeRoute('/tables'),
+      openMaps: this.activeRoute('/maps'),
+      openPages: this.activeRoute('-page'),
+      miniActive: true,
     };
     this.activeRoute.bind(this);
   }
@@ -73,7 +42,7 @@ class Sidebar extends Component {
     return this.props.location.pathname.indexOf(routeName) > -1 ? true : false;
   }
   openCollapse(collapse) {
-    var st = {};
+    const st = {};
     st[collapse] = !this.state[collapse];
     this.setState(st);
   }
@@ -81,116 +50,21 @@ class Sidebar extends Component {
     const {
       classes,
       color,
-      logo,
-      image,
-      logoText,
       routes,
       bgColor,
-      rtlActive
+      rtlActive,
     } = this.props;
-    const itemText =
-      classes.itemText +
-      " " +
-      cx({
-        [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
-        [classes.itemTextMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.itemTextRTL]: rtlActive
-      });
-    const userWrapperClass =
-      classes.user +
-      " " +
-      cx({
-        [classes.whiteAfter]: bgColor === "white"
-      });
-    const caret =
-      classes.caret +
-      " " +
-      cx({
-        [classes.caretRTL]: rtlActive
-      });
-    const photo =
-      classes.photo +
-      " " +
-      cx({
-        [classes.photoRTL]: rtlActive
-      });
-    var user = (
-      <div className={userWrapperClass}>
-        <div className={photo}>
-          <img src={avatar} className={classes.avatarImg} alt="..." />
-        </div>
-        <List className={classes.list}>
-          <ListItem className={classes.item + " " + classes.userItem}>
-            <NavLink
-              to={"#"}
-              className={classes.itemLink + " " + classes.userCollapseButton}
-              onClick={() => this.openCollapse("openAvatar")}
-            >
-              <ListItemText
-                primary={rtlActive ? "تانيا أندرو" : "Tania Andrew"}
-                secondary={
-                  <b
-                    className={
-                      caret + " " + classes.userCaret +
-                      " " +
-                      (this.state.openAvatar ? classes.caretActive : "")
-                    }
-                  />
-                }
-                disableTypography={true}
-                className={itemText + " " + classes.userItemText}
-              />
-            </NavLink>
-          </ListItem>
-        </List>
-      </div>
-    );
-    var links = (
+    const links = (
       <List className={classes.list}>
         {routes.map((prop, key) => {
           if (prop.redirect) {
             return null;
           }
           if (prop.collapse) {
-            const navLinkClasses =
-              classes.itemLink +
-              " " +
-              cx({
-                [" " + classes.collapseActive]: this.activeRoute(prop.path)
-              });
-            const itemText =
-              classes.itemText +
-              " " +
-              cx({
-                [classes.itemTextMini]:
-                  this.props.miniActive && this.state.miniActive,
-                [classes.itemTextMiniRTL]:
-                  rtlActive && this.props.miniActive && this.state.miniActive,
-                [classes.itemTextRTL]: rtlActive
-              });
-            const collapseItemText =
-              classes.collapseItemText +
-              " " +
-              cx({
-                [classes.collapseItemTextMini]:
-                  this.props.miniActive && this.state.miniActive,
-                [classes.collapseItemTextMiniRTL]:
-                  rtlActive && this.props.miniActive && this.state.miniActive,
-                [classes.collapseItemTextRTL]: rtlActive
-              });
-            const itemIcon =
-              classes.itemIcon +
-              " " +
-              cx({
-                [classes.itemIconRTL]: rtlActive
-              });
-            const caret =
-              classes.caret +
-              " " +
-              cx({
-                [classes.caretRTL]: rtlActive
-              });
+            const navLinkClasses = classes.itemLink;
+            const {
+              itemText, collapseItemText, itemIcon, caret,
+            } = classes;
             return (
               <ListItem key={key} className={classes.item}>
                 <NavLink
@@ -304,12 +178,6 @@ class Sidebar extends Component {
           rtlActive && this.props.miniActive && this.state.miniActive,
         [classes.logoNormalRTL]: rtlActive
       });
-    const logoMini =
-      classes.logoMini +
-      " " +
-      cx({
-        [classes.logoMiniRTL]: rtlActive
-      });
     const logoClasses =
       classes.logo +
       " " +
@@ -318,11 +186,8 @@ class Sidebar extends Component {
       });
     var brand = (
       <div className={logoClasses}>
-        <a href="http://www.creative-tim.com" className={logoMini}>
-          <img src={logo} alt="logo" className={classes.img} />
-        </a>
         <a href="http://www.creative-tim.com" className={logoNormal}>
-          {logoText}
+          <img src={logo} alt="logo" className={classes.img} />
         </a>
       </div>
     );
@@ -361,16 +226,8 @@ class Sidebar extends Component {
             {brand}
             <SidebarWrapper
               className={sidebarWrapper}
-              user={user}
-              headerLinks={<HeaderLinks rtlActive={rtlActive} />}
               links={links}
             />
-            {image !== undefined ? (
-              <div
-                className={classes.background}
-                style={{ backgroundImage: "url(" + image + ")" }}
-              />
-            ) : null}
           </Drawer>
         </Hidden>
         <Hidden smDown>
@@ -381,21 +238,14 @@ class Sidebar extends Component {
             variant="permanent"
             open
             classes={{
-              paper: drawerPaper + " " + classes[bgColor + "Background"]
+              paper: `${drawerPaper} ${classes[`${bgColor} Background`]}`,
             }}
           >
             {brand}
             <SidebarWrapper
               className={sidebarWrapper}
-              user={user}
               links={links}
             />
-            {image !== undefined ? (
-              <div
-                className={classes.background}
-                style={{ backgroundImage: "url(" + image + ")" }}
-              />
-            ) : null}
           </Drawer>
         </Hidden>
       </div>
@@ -404,18 +254,7 @@ class Sidebar extends Component {
 }
 
 Sidebar.defaultProps = {
-  bgColor: "blue"
-};
-
-Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  bgColor: PropTypes.oneOf(["white", "black", "blue"]),
-  rtlActive: PropTypes.bool,
-  color: PropTypes.oneOf(["white", "red", "orange", "green", "blue", "purple", "rose"]),
-  logo: PropTypes.string,
-  logoText: PropTypes.string,
-  image: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object)
+  bgColor: 'blue',
 };
 
 export default withStyles(sidebarStyle)(Sidebar);

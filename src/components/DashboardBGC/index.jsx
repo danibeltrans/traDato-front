@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Select, Input, Button } from 'antd';
+import { Select } from 'antd';
+import CustomInput from 'components/CustomInput/CustomInput';
+import Button from 'components/CustomButtons/Button';
 import Card from 'components/Card';
 import InfoData from 'components/InfoData';
 import constant from 'Constants';
@@ -55,8 +57,16 @@ class Dashboard extends Component {
             <Select.Option value="2">Cedula de Extranjeria</Select.Option>
             <Select.Option value="3">Pasaporte</Select.Option>
           </Select>
-          <Input onChange={e => this.setState({ occurrence: e.target.value })} placeholder="Document" />
-          <Button onClick={this.searchById} type="primary" >Search</Button>
+          <CustomInput
+            id="regular"
+            inputProps={{
+              placeholder: 'Document',
+            }}
+            formControlProps={{
+              fullWidth: true,
+            }}
+          />
+          <Button color="primary" round onClick={this.searchById}>Search</Button>
         </div>
         <div>
           {

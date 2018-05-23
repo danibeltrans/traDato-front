@@ -8,6 +8,16 @@ padding: 0 10px;
 }
 .searchInputs{
   display: flex;
+  align-items: center;
+  > div{
+    margin-right: 25px;
+  }
+  .CustomInput-inputNoLabel-183{
+    padding-top: 0;
+  }
+  .CustomInput-formControl-186{
+    max-width: 210px;
+  }
   input{
     max-width: 210px;
     width: 210px;

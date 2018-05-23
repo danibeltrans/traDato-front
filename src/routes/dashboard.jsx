@@ -27,7 +27,7 @@ const dashRoutes = [
     component: Reports,
   }, {
     path: '/admin/batch-upload',
-    name: 'Btch Upload',
+    name: 'Batch Upload',
     icon: DashboardIcon,
     component: Dashboard,
   }, {
@@ -36,6 +36,8 @@ const dashRoutes = [
     icon: DashboardIcon,
     component: Dashboard,
   },
-  { redirect: true, path: "/", pathTo: "/dashboard", name: "Dashboard" }
+  {
+    redirect: true, path: '/', pathTo: '/dashboard', name: 'Dashboard',
+  },
 ];
 export default dashRoutes;
