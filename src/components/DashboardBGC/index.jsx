@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Select } from 'antd';
+import Select from 'material-ui/Select';
+import MenuItem from 'material-ui/Menu/MenuItem';
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 import Card from 'components/Card';
@@ -11,6 +12,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      document: '1',
       Data: [{
         name: 'Procaduria',
         statusPerson: true,
@@ -24,6 +26,10 @@ class Dashboard extends Component {
       judicialResult: null,
     };
     this.searchById = this.searchById.bind(this);
+    this.handleSimple = this.handleSimple.bind(this);
+  }
+  handleSimple(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
   searchById() {
     const { API_URL } = constant;
@@ -48,14 +54,52 @@ class Dashboard extends Component {
       });
   }
   render() {
-    const { Data, judicialResult } = this.state;
+    const { Data, judicialResult, document } = this.state;
+    const { classes = {} } = this.props;
     return (
       <DashboardStyle>
         <div className="searchInputs">
-          <Select defaultValue="1" >
-            <Select.Option value="1">Cedula de Ciudadania</Select.Option>
-            <Select.Option value="2">Cedula de Extranjeria</Select.Option>
-            <Select.Option value="3">Pasaporte</Select.Option>
+          <Select
+            MenuProps={{
+              className: classes.selectMenu,
+            }}
+            classes={{
+              select: classes.select,
+            }}
+            value={document}
+            onChange={this.handleSimple}
+            inputProps={{
+              name: 'document',
+              id: 'document',
+            }}
+          >
+            <MenuItem
+              classes={{
+                root: classes.selectMenuItem,
+                selected: classes.selectMenuItemSelected,
+              }}
+              value="1"
+            >
+              Cedula de Ciudadania
+            </MenuItem>
+            <MenuItem
+              classes={{
+                root: classes.selectMenuItem,
+                selected: classes.selectMenuItemSelected,
+              }}
+              value="2"
+            >
+              edula de Extranjeria
+            </MenuItem>
+            <MenuItem
+              classes={{
+                root: classes.selectMenuItem,
+                selected: classes.selectMenuItemSelected,
+              }}
+              value="3"
+            >
+              Pasaporte
+            </MenuItem>
           </Select>
           <CustomInput
             id="regular"
