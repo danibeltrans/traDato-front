@@ -1,25 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // material-ui components
-import withStyles from "material-ui/styles/withStyles";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import IconButton from "material-ui/IconButton";
-import Button from "material-ui/Button";
-import Hidden from "material-ui/Hidden";
-
-// material-ui icons
-import Menu from "@material-ui/icons/Menu";
-import MoreVert from "@material-ui/icons/MoreVert";
-import ViewList from "@material-ui/icons/ViewList";
-
-// core components
-import HeaderLinks from "./HeaderLinks";
-import CustomIconButton from "components/CustomButtons/IconButton.jsx";
-
-import headerStyle from "assets/jss/material-dashboard-pro-react/components/headerStyle.jsx";
+import withStyles from 'material-ui/styles/withStyles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
+import Hidden from 'material-ui/Hidden';
+import Menu from '@material-ui/icons/Menu';
+import headerStyle from 'assets/jss/material-dashboard-pro-react/components/headerStyle';
+import HeaderLinks from './HeaderLinks';
 
 function Header({ ...props }) {
   function makeBrand() {
@@ -44,28 +36,9 @@ function Header({ ...props }) {
   const appBarClasses = cx({
     [" " + classes[color]]: color
   });
-  const sidebarMinimize =
-    classes.sidebarMinimize +
-    " " +
-    cx({
-      [classes.sidebarMinimizeRTL]: rtlActive
-    });
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <Hidden smDown>
-          <div className={sidebarMinimize}>
-            {props.miniActive ? (
-              <CustomIconButton color="white" onClick={props.sidebarMinimize}>
-                <ViewList className={classes.sidebarMiniIcon} />
-              </CustomIconButton>
-            ) : (
-              <CustomIconButton color="white" onClick={props.sidebarMinimize}>
-                <MoreVert className={classes.sidebarMiniIcon} />
-              </CustomIconButton>
-            )}
-          </div>
-        </Hidden>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
           <Button href="#" className={classes.title}>

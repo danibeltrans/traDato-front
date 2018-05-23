@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 // javascript plugin used to create scrollbars on windows
-import { NavLink } from 'react-router-dom';
-import cx from 'classnames';
+import { NavLink, Link } from 'react-router-dom';
 import logo from 'images/logo.png';
 
 // material-ui components
@@ -13,7 +11,6 @@ import ListItem from 'material-ui/List/ListItem';
 import ListItemIcon from 'material-ui/List/ListItemIcon';
 import ListItemText from 'material-ui/List/ListItemText';
 import Hidden from 'material-ui/Hidden';
-import Collapse from 'material-ui/transitions/Collapse';
 import sidebarStyle from 'assets/jss/material-dashboard-pro-react/components/sidebarStyle';
 
 import SidebarWrapper from './Wrapper';
@@ -33,13 +30,12 @@ class Sidebar extends Component {
       openTables: this.activeRoute('/tables'),
       openMaps: this.activeRoute('/maps'),
       openPages: this.activeRoute('-page'),
-      miniActive: true,
     };
     this.activeRoute.bind(this);
   }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
-    return this.props.location.pathname.indexOf(routeName) > -1 ? true : false;
+    return this.props.location.pathname.indexOf(routeName) > -1;
   }
   openCollapse(collapse) {
     const st = {};
@@ -51,114 +47,30 @@ class Sidebar extends Component {
       classes,
       color,
       routes,
-      bgColor,
+      bgColor = 'blue',
       rtlActive,
     } = this.props;
+    const {
+      logoContent, logoImg, drawerPaper, sidebarWrapper, itemLink,
+    } = classes;
+
     const links = (
       <List className={classes.list}>
-        {routes.map((prop, key) => {
+        {routes.map((prop) => {
+          console.log(prop.redirect);
           if (prop.redirect) {
             return null;
           }
-          if (prop.collapse) {
-            const navLinkClasses = classes.itemLink;
-            const {
-              itemText, collapseItemText, itemIcon, caret,
-            } = classes;
-            return (
-              <ListItem key={key} className={classes.item}>
-                <NavLink
-                  to={"#"}
-                  className={navLinkClasses}
-                  onClick={() => this.openCollapse(prop.state)}
-                >
-                  <ListItemIcon className={itemIcon}>
-                    <prop.icon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={prop.name}
-                    secondary={
-                      <b
-                        className={
-                          caret +
-                          " " +
-                          (this.state[prop.state] ? classes.caretActive : "")
-                        }
-                      />
-                    }
-                    disableTypography={true}
-                    className={itemText}
-                  />
-                </NavLink>
-                <Collapse in={this.state[prop.state]} unmountOnExit>
-                  <List className={classes.list + " " + classes.collapseList}>
-                    {prop.views.map((prop, key) => {
-                      if (prop.redirect) {
-                        return null;
-                      }
-                      const navLinkClasses =
-                        classes.collapseItemLink +
-                        " " +
-                        cx({
-                          [" " + classes[color]]: this.activeRoute(prop.path)
-                        });
-                      const collapseItemMini =
-                        classes.collapseItemMini +
-                        " " +
-                        cx({
-                          [classes.collapseItemMiniRTL]: rtlActive
-                        });
-                      return (
-                        <ListItem key={key} className={classes.collapseItem}>
-                          <NavLink to={prop.path} className={navLinkClasses}>
-                            <span className={collapseItemMini}>
-                              {prop.mini}
-                            </span>
-                            <ListItemText
-                              primary={prop.name}
-                              disableTypography={true}
-                              className={collapseItemText}
-                            />
-                          </NavLink>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </Collapse>
-              </ListItem>
-            );
-          }
-          const navLinkClasses =
-            classes.itemLink +
-            " " +
-            cx({
-              [" " + classes[color]]: this.activeRoute(prop.path)
-            });
-          const itemText =
-            classes.itemText +
-            " " +
-            cx({
-              [classes.itemTextMini]:
-                this.props.miniActive && this.state.miniActive,
-              [classes.itemTextMiniRTL]:
-                rtlActive && this.props.miniActive && this.state.miniActive,
-              [classes.itemTextRTL]: rtlActive
-            });
-          const itemIcon =
-            classes.itemIcon +
-            " " +
-            cx({
-              [classes.itemIconRTL]: rtlActive
-            });
+          const { itemText, itemIcon } = classes;
           return (
-            <ListItem key={key} className={classes.item}>
-              <NavLink to={prop.path} className={navLinkClasses}>
+            <ListItem key={prop.path} className={classes.item}>
+              <NavLink to={prop.path} className={`${itemLink} ${this.activeRoute(prop.path) ? classes[color] : ''}`}>
                 <ListItemIcon className={itemIcon}>
                   <prop.icon />
                 </ListItemIcon>
                 <ListItemText
                   primary={prop.name}
-                  disableTypography={true}
+                  disableTypography
                   className={itemText}
                 />
               </NavLink>
@@ -167,60 +79,26 @@ class Sidebar extends Component {
         })}
       </List>
     );
-
-    const logoNormal =
-      classes.logoNormal +
-      " " +
-      cx({
-        [classes.logoNormalSidebarMini]:
-          this.props.miniActive && this.state.miniActive,
-        [classes.logoNormalSidebarMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.logoNormalRTL]: rtlActive
-      });
-    const logoClasses =
-      classes.logo +
-      " " +
-      cx({
-        [classes.whiteAfter]: bgColor === "white"
-      });
-    var brand = (
-      <div className={logoClasses}>
-        <a href="http://www.creative-tim.com" className={logoNormal}>
-          <img src={logo} alt="logo" className={classes.img} />
-        </a>
+    const brand = (
+      <div className={logoContent}>
+        <Link to="/">
+          <img src={logo} alt="logo" className={logoImg} />
+        </Link>
       </div>
     );
-    const drawerPaper =
-      classes.drawerPaper +
-      " " +
-      cx({
-        [classes.drawerPaperMini]:
-          this.props.miniActive && this.state.miniActive,
-        [classes.drawerPaperRTL]: rtlActive
-      });
-    const sidebarWrapper =
-      classes.sidebarWrapper +
-      " " +
-      cx({
-        [classes.drawerPaperMini]:
-          this.props.miniActive && this.state.miniActive,
-        [classes.sidebarWrapperWithPerfectScrollbar]:
-          navigator.platform.indexOf("Win") > -1
-      });
     return (
       <div ref="mainPanel">
         <Hidden mdUp>
           <Drawer
             variant="temporary"
-            anchor={rtlActive ? "left" : "right"}
+            anchor={rtlActive ? 'left' : 'right'}
             open={this.props.open}
             classes={{
-              paper: drawerPaper + " " + classes[bgColor + "Background"]
+              paper: `${drawerPaper} ${classes[`${bgColor} Background`]}`,
             }}
             onClose={this.props.handleDrawerToggle}
             ModalProps={{
-              keepMounted: true // Better open performance on mobile.
+              keepMounted: true, // Better open performance on mobile.
             }}
           >
             {brand}
@@ -232,9 +110,7 @@ class Sidebar extends Component {
         </Hidden>
         <Hidden smDown>
           <Drawer
-            onMouseOver={() => this.setState({ miniActive: false })}
-            onMouseOut={() => this.setState({ miniActive: true })}
-            anchor={rtlActive ? "right" : "left"}
+            anchor={rtlActive ? 'right' : 'left'}
             variant="permanent"
             open
             classes={{
@@ -252,9 +128,5 @@ class Sidebar extends Component {
     );
   }
 }
-
-Sidebar.defaultProps = {
-  bgColor: 'blue',
-};
 
 export default withStyles(sidebarStyle)(Sidebar);
