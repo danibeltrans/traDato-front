@@ -1,58 +1,58 @@
-import React from "react";
-import cx from "classnames";
-import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import cx from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 // material-ui components
-import withStyles from "material-ui/styles/withStyles";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import IconButton from "material-ui/IconButton";
-import Button from "material-ui/Button";
-import Hidden from "material-ui/Hidden";
-import Drawer from "material-ui/Drawer";
-import List from "material-ui/List";
-import ListItem from "material-ui/List/ListItem";
-import ListItemIcon from "material-ui/List/ListItemIcon";
-import ListItemText from "material-ui/List/ListItemText";
+import withStyles from 'material-ui/styles/withStyles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
+import Hidden from 'material-ui/Hidden';
+import Drawer from 'material-ui/Drawer';
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemIcon from 'material-ui/List/ListItemIcon';
+import ListItemText from 'material-ui/List/ListItemText';
 
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Menu from "@material-ui/icons/Menu";
+import Dashboard from '@material-ui/icons/Dashboard';
+import Menu from '@material-ui/icons/Menu';
 
-import pagesRoutes from "routes/pages.jsx";
+import pagesRoutes from 'routes/pages';
 
-import pagesHeaderStyle from "assets/jss/material-dashboard-pro-react/components/pagesHeaderStyle.jsx";
+import pagesHeaderStyle from 'assets/jss/material-dashboard-pro-react/components/pagesHeaderStyle';
 
 class PagesHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
   }
-  handleDrawerToggle = () => {
+  handleDrawerToggle() {
     this.setState({ open: !this.state.open });
-  };
+  }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
-    return this.props.location.pathname.indexOf(routeName) > -1 ? true : false;
+    return this.props.location.pathname.indexOf(routeName) > -1;
   }
   render() {
     const { classes, color } = this.props;
     const appBarClasses = cx({
-      [" " + classes[color]]: color
+      [' ' + classes[color]]: color
     });
-    var list = (
+    const list = (
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
-          <NavLink to={"/dashboard"} className={classes.navLink}>
+          <NavLink to="/dashboard" className={classes.navLink}>
             <ListItemIcon className={classes.listItemIcon}>
               <Dashboard />
             </ListItemIcon>
             <ListItemText
-              primary={"Dashboard"}
-              disableTypography={true}
+              primary="Dashboard"
+              disableTypography
               className={classes.listItemText}
             />
           </NavLink>
@@ -64,7 +64,7 @@ class PagesHeader extends React.Component {
           const navLink =
             classes.navLink +
             cx({
-              [" " + classes.navLinkActive]: this.activeRoute(prop.path)
+              [" " + classes.navLinkActive]: this.activeRoute(prop.path),
             });
           return (
             <ListItem key={key} className={classes.listItem}>
@@ -74,7 +74,7 @@ class PagesHeader extends React.Component {
                 </ListItemIcon>
                 <ListItemText
                   primary={prop.short}
-                  disableTypography={true}
+                  disableTypography
                   className={classes.listItemText}
                 />
               </NavLink>
@@ -108,14 +108,14 @@ class PagesHeader extends React.Component {
             <Hidden mdUp>
               <Drawer
                 variant="temporary"
-                anchor={"right"}
+                anchor="right"
                 open={this.state.open}
                 classes={{
-                  paper: classes.drawerPaper
+                  paper: classes.drawerPaper,
                 }}
                 onClose={this.handleDrawerToggle}
                 ModalProps={{
-                  keepMounted: true // Better open performance on mobile.
+                  keepMounted: true,
                 }}
               >
                 {list}
@@ -127,10 +127,5 @@ class PagesHeader extends React.Component {
     );
   }
 }
-
-PagesHeader.propTypes = {
-  classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"])
-};
 
 export default withStyles(pagesHeaderStyle)(PagesHeader);

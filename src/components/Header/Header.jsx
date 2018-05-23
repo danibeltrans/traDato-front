@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
 
 // material-ui components
 import withStyles from 'material-ui/styles/withStyles';
@@ -15,12 +13,12 @@ import HeaderLinks from './HeaderLinks';
 
 function Header({ ...props }) {
   function makeBrand() {
-    var name;
-    props.routes.map((prop, key) => {
+    let name;
+    props.routes.map((prop) => {
       if (prop.collapse) {
-        prop.views.map((prop, key) => {
-          if (prop.path === props.location.pathname) {
-            name = prop.name;
+        prop.views.map((item) => {
+          if (item.path === props.location.pathname) {
+            name = item.name;
           }
           return null;
         });
@@ -32,12 +30,9 @@ function Header({ ...props }) {
     });
     return name;
   }
-  const { classes, color, rtlActive } = props;
-  const appBarClasses = cx({
-    [" " + classes[color]]: color
-  });
+  const { classes, rtlActive } = props;
   return (
-    <AppBar className={classes.appBar + appBarClasses}>
+    <AppBar className={classes.appBar}>
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
@@ -62,11 +57,5 @@ function Header({ ...props }) {
     </AppBar>
   );
 }
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  rtlActive: PropTypes.bool
-};
 
 export default withStyles(headerStyle)(Header);
