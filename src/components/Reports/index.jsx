@@ -1,66 +1,54 @@
-import React, { Component } from 'react';
-import { Table } from 'antd';
-import ReportsStyle from './style';
+import React from 'react';
 
-class Reports extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [{
-        key: '1',
-        search: '1',
-        id: '1',
-        name: 'John Brown',
-        date: '10/10/2017',
-        issue: true,
-        error: false,
-      }, {
-        key: '2',
-        search: '2',
-        id: '2',
-        name: 'Jim Green',
-        date: '12/10/2017',
-        issue: true,
-        error: false,
-      }, {
-        key: '3',
-        search: '3',
-        id: '3',
-        name: 'Joe Black',
-        date: '13/10/2017',
-        issue: false,
-        error: false,
-      }],
-      columns: [{
-        title: 'search',
-        dataIndex: 'search',
-      }, {
-        title: 'id',
-        dataIndex: 'id',
-      }, {
-        title: 'name',
-        dataIndex: 'name',
-      }, {
-        title: 'date',
-        dataIndex: 'date',
-      }, {
-        title: 'issue',
-        dataIndex: 'issue',
-      }, {
-        title: 'error',
-        dataIndex: 'error',
-      }],
-    };
-  }
-  render() {
-    const { data, columns } = this.state;
-    return (
-      <ReportsStyle>
-        <Table columns={columns} dataSource={data} size="middle" />
-      </ReportsStyle>
-    );
-  }
-}
+// material-ui components
+import withStyles from 'material-ui/styles/withStyles';
 
-export default Reports;
+// material-ui icons
+import Assignment from '@material-ui/icons/Assignment';
 
+// core components
+import GridContainer from 'components/Grid/GridContainer';
+import ItemGrid from 'components/Grid/ItemGrid';
+import IconCard from 'components/Cards/IconCard';
+import Table from 'components/Table/Table';
+
+const style = {
+  customCardContentClass: {
+    paddingLeft: '0',
+    paddingRight: '0',
+  },
+};
+
+const Reports = () => (
+  <GridContainer>
+    <ItemGrid xs={12}>
+      <IconCard
+        icon={Assignment}
+        iconColor="rose"
+        title="Report"
+        content={
+          <Table
+            tableHeaderColor="primary"
+            tableHead={[
+              'search',
+              'id',
+              'name',
+              'date',
+              'issue',
+              'error',
+            ]}
+            tableData={[
+              ['1', '1', 'John Brown', '10/10/2017', true, false],
+              ['2', '2', 'Jim Green', '12/10/2017', true, false],
+              ['3', '3', 'Joe Black', '13/10/2017', false, false],
+            ]}
+            coloredColls={[3]}
+            colorsColls={['primary']}
+          />
+        }
+      />
+    </ItemGrid>
+  </GridContainer>
+);
+
+export default withStyles(style)(Reports);
