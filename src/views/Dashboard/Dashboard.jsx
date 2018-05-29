@@ -36,159 +36,150 @@ import dashboardStyle from 'assets/jss/material-dashboard-pro-react/views/dashbo
 
 import priceImage1 from 'assets/img/card-2.jpeg';
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  render() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <GridContainer>
-          <ItemGrid xs={12} sm={6} md={6} lg={3}>
-            <StatsCard
-              icon={ContentCopy}
-              iconColor="orange"
-              title="Used Space"
-              description="49/50"
-              small="GB"
-              statIcon={Warning}
-              statIconColor="danger"
-              statLink={{ text: 'Get More Space...', href: '#pablo' }}
+const Dashboard = ({ classes }) => (
+  <div>
+    <GridContainer>
+      <ItemGrid xs={12} sm={6} md={6} lg={3}>
+        <StatsCard
+          icon={ContentCopy}
+          iconColor="orange"
+          title="Used Space"
+          description="49/50"
+          small="GB"
+          statIcon={Warning}
+          statIconColor="danger"
+          statLink={{ text: 'Get More Space...', href: '#pablo' }}
+        />
+      </ItemGrid>
+      <ItemGrid xs={12} sm={6} md={6} lg={3}>
+        <StatsCard
+          icon={Store}
+          iconColor="green"
+          title="Revenue"
+          description="$34,245"
+          statIcon={DateRange}
+          statText="Last 24 Hours"
+        />
+      </ItemGrid>
+      <ItemGrid xs={12} sm={6} md={6} lg={3}>
+        <StatsCard
+          icon={InfoOutline}
+          iconColor="red"
+          title="Fixed Issues"
+          description="75"
+          statIcon={LocalOffer}
+          statText="Tracked from Github"
+        />
+      </ItemGrid>
+      <ItemGrid xs={12} sm={6} md={6} lg={3}>
+        <StatsCard
+          icon={Accessibility}
+          iconColor="blue"
+          title="Followers"
+          description="+245"
+          statIcon={Update}
+          statText="Just Updated"
+        />
+      </ItemGrid>
+    </GridContainer>
+    <GridContainer>
+      <ItemGrid xs={12} sm={12} md={4}>
+        <ChartCard
+          chart={
+            <ChartistGraph
+              className="ct-chart-white-colors"
+              data={dailySalesChart.data}
+              type="Line"
+              options={dailySalesChart.options}
+              listener={dailySalesChart.animation}
             />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={6} md={6} lg={3}>
-            <StatsCard
-              icon={Store}
-              iconColor="green"
-              title="Revenue"
-              description="$34,245"
-              statIcon={DateRange}
-              statText="Last 24 Hours"
-            />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={6} md={6} lg={3}>
-            <StatsCard
-              icon={InfoOutline}
-              iconColor="red"
-              title="Fixed Issues"
-              description="75"
-              statIcon={LocalOffer}
-              statText="Tracked from Github"
-            />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={6} md={6} lg={3}>
-            <StatsCard
-              icon={Accessibility}
-              iconColor="blue"
-              title="Followers"
-              description="+245"
-              statIcon={Update}
-              statText="Just Updated"
-            />
-          </ItemGrid>
-        </GridContainer>
-        <GridContainer>
-          <ItemGrid xs={12} sm={12} md={4}>
-            <ChartCard
-              chart={
-                <ChartistGraph
-                  className="ct-chart-white-colors"
-                  data={dailySalesChart.data}
-                  type="Line"
-                  options={dailySalesChart.options}
-                  listener={dailySalesChart.animation}
-                />
-              }
-              underChart={
-                <div>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Refresh"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="infoNoBackground" justIcon>
-                      <Refresh className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Change Date"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="defaultNoBackground" justIcon>
-                      <Edit className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                </div>
-              }
-              hover
-              chartColor="blue"
-              title="Daily Sales"
-              text={
-                <span>
-                  <span className={classes.successText}>
-                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                  </span>{' '}
-                  increase in today sales.
-                </span>
-              }
-              statIcon={AccessTime}
-              statText="updated 4 minutes ago"
-            />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={12} md={4}>
-            <ImagePriceCard
-              image={priceImage1}
-              title="Cozy 5 Stars Apartment"
-              text="The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to &quot;Naviglio&quot; where you can enjoy the main night life in Barcelona."
-              price="$899/night"
-              statIcon={Place}
-              statText="Barcelona, Spain"
-              hover
-              underImage={
-                <div>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="View"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="defaultNoBackground" justIcon>
-                      <ArtTrack className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Edit"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="successNoBackground" justIcon>
-                      <Refresh className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Remove"
-                    placement="bottom"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="dangerNoBackground" justIcon>
-                      <Edit className={classes.underChartIcons} />
-                    </Button>
-                  </Tooltip>
-                </div>
-              }
-            />
-          </ItemGrid>
-        </GridContainer>
-      </div>
-    );
-  }
-}
+          }
+          underChart={
+            <div>
+              <Tooltip
+                id="tooltip-top"
+                title="Refresh"
+                placement="bottom"
+                classes={{ tooltip: classes.tooltip }}
+              >
+                <Button color="infoNoBackground" justIcon>
+                  <Refresh className={classes.underChartIcons} />
+                </Button>
+              </Tooltip>
+              <Tooltip
+                id="tooltip-top"
+                title="Change Date"
+                placement="bottom"
+                classes={{ tooltip: classes.tooltip }}
+              >
+                <Button color="defaultNoBackground" justIcon>
+                  <Edit className={classes.underChartIcons} />
+                </Button>
+              </Tooltip>
+            </div>
+          }
+          hover
+          chartColor="blue"
+          title="Daily Sales"
+          text={
+            <span>
+              <span className={classes.successText}>
+                <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+              </span>{' '}
+              increase in today sales.
+            </span>
+          }
+          statIcon={AccessTime}
+          statText="updated 4 minutes ago"
+        />
+      </ItemGrid>
+      <ItemGrid xs={12} sm={12} md={4}>
+        <ImagePriceCard
+          image={priceImage1}
+          title="Cozy 5 Stars Apartment"
+          text="The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to &quot;Naviglio&quot; where you can enjoy the main night life in Barcelona."
+          price="$899/night"
+          statIcon={Place}
+          statText="Barcelona, Spain"
+          hover
+          underImage={
+            <div>
+              <Tooltip
+                id="tooltip-top"
+                title="View"
+                placement="bottom"
+                classes={{ tooltip: classes.tooltip }}
+              >
+                <Button color="defaultNoBackground" justIcon>
+                  <ArtTrack className={classes.underChartIcons} />
+                </Button>
+              </Tooltip>
+              <Tooltip
+                id="tooltip-top"
+                title="Edit"
+                placement="bottom"
+                classes={{ tooltip: classes.tooltip }}
+              >
+                <Button color="successNoBackground" justIcon>
+                  <Refresh className={classes.underChartIcons} />
+                </Button>
+              </Tooltip>
+              <Tooltip
+                id="tooltip-top"
+                title="Remove"
+                placement="bottom"
+                classes={{ tooltip: classes.tooltip }}
+              >
+                <Button color="dangerNoBackground" justIcon>
+                  <Edit className={classes.underChartIcons} />
+                </Button>
+              </Tooltip>
+            </div>
+          }
+        />
+      </ItemGrid>
+    </GridContainer>
+  </div>
+);
 
 export default withStyles(dashboardStyle)(Dashboard);
