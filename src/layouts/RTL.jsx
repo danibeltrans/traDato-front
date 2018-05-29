@@ -11,7 +11,6 @@ import withStyles from "material-ui/styles/withStyles";
 
 // core components
 import Header from "components/Header/Header.jsx";
-import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
 import rtlRoutes from "routes/rtl.jsx";
@@ -95,7 +94,6 @@ class RTL extends React.Component {
           <div className={classes.content}>
             <div className={classes.container}>{switchRoutes}</div>
           </div>
-          <Footer fluid rtlActive />
         </div>
       </div>
     );

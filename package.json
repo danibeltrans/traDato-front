@@ -43,7 +43,7 @@
     "build": "cross-env NODE_PATH=./src npm run build-css && react-scripts build",
     "test": "cross-env NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "cross-env NODE_PATH=./src react-scripts eject",
-    "deploy": "npm run build"
+    "deploy": "cross-env NODE_PATH=./src npm run build"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

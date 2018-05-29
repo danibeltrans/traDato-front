@@ -6,11 +6,6 @@ import Reports from 'components/Reports';
 
 const dashRoutes = [
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    icon: DashboardIcon,
-    component: Dashboard,
-  }, {
     path: '/admin/BGC',
     name: 'BGC',
     icon: DashboardIcon,

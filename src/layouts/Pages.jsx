@@ -10,7 +10,6 @@ import withStyles from "material-ui/styles/withStyles";
 
 // core components
 import PagesHeader from "components/Header/PagesHeader.jsx";
-import Footer from "components/Footer/Footer.jsx";
 
 import pagesRoutes from "routes/pages.jsx";
 
@@ -60,7 +59,6 @@ class Pages extends React.Component {
                 );
               })}
             </Switch>
-            <Footer white />
             <div
               className={classes.fullPageBackground}
               style={{ backgroundImage: "url(" + bgImage + ")" }}
