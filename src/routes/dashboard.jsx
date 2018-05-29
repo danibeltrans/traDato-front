@@ -32,7 +32,7 @@ const dashRoutes = [
     component: Dashboard,
   },
   {
-    redirect: true, path: '/', pathTo: '/dashboard', name: 'Dashboard',
+    redirect: true, path: '/', pathTo: '/admin/BGC', name: 'BGC',
   },
 ];
 export default dashRoutes;
