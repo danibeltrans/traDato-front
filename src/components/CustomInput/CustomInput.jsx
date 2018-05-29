@@ -1,6 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
-
 // material-ui components
 import withStyles from 'material-ui/styles/withStyles';
 import FormControl from 'material-ui/Form/FormControl';
@@ -28,40 +26,39 @@ function CustomInput({ ...props }) {
     rtlActive,
   } = props;
 
-  let labelClasses = `${error ? classes.labelRootError : ''} ${success && !error ? classes.labelRootSuccess : ''}`;
+  const {
+    labelRootError,
+    labelRootSuccess,
+    underline,
+    underlineError,
+    underlineSuccess,
+    formControl,
+    labelWithAdornment,
+    feedbackNoLabel,
+    feedback,
+    input,
+    inputRTL,
+    inputNoLabel,
+    inputWithAdornment,
+    feedbackAdorment,
+    disabled,
+    labelRoot,
+  } = classes;
 
-  let formControlClasses = `${classes.formControl} ${formControlProps !== undefined ? formControlProps.className : ''}`;
-  const underlineClasses = cx({
-    [classes.underline]: true,
-    [classes.underlineError]: error,
-    [classes.underlineSuccess]: success && !error,
-  });
+  let labelClasses = `${error ? labelRootError : ''} ${success && !error ? labelRootSuccess : ''}`;
+
+  let formControlClasses = `${formControl} ${formControlProps !== undefined ? formControlProps.className : ''}`;
+  const underlineClasses = `${underline} ${error ? underlineError : ''} ${success && !error ? underlineSuccess : ''}`;
   if (inputProps !== undefined) {
-    formControlClasses =
-      formControlClasses +
-      " " +
-      cx({
-        [classes.inputWithAdornment]: (inputProps.startAdornment !== undefined ||
-            inputProps.endAdornment !== undefined) &&
-          labelText === undefined,
-      });
+    formControlClasses = `${formControlClasses} + ${(inputProps.startAdornment !== undefined || inputProps.endAdornment !== undefined) && labelText === undefined ? inputWithAdornment : ''}`;
   }
   if (inputProps !== undefined) {
-    labelClasses = `${labelClasses} ${inputProps.endAdornment !== undefined ? classes.labelWithAdornment : ''}`;
+    labelClasses = `${labelClasses} ${inputProps.endAdornment !== undefined ? labelWithAdornment : ''}`;
   }
-  const successClasses = `${classes.feedback} ${classes.labelRootSuccess} ${labelText === undefined ? classes.feedbackNoLabel : ''} ${inputProps !== undefined && inputProps.endAdornment !== undefined ? classes.feedbackAdorment : ''}`;
+  const successClasses = `${feedback} ${labelRootSuccess} ${labelText === undefined ? feedbackNoLabel : ''} ${inputProps !== undefined && inputProps.endAdornment !== undefined ? feedbackAdorment : ''}`;
 
-  const errorClasses =
-    classes.feedback +
-    " " +
-    classes.labelRootError +
-    " " +
-    cx({
-      [classes.feedbackNoLabel]: labelText === undefined,
-      [classes.feedbackAdorment]:
-        inputProps !== undefined && inputProps.endAdornment !== undefined,
-    });
-  const input = `${classes.input} ${rtlActive ? classes.inputRTL : ''} ${labelText === undefined ? classes.inputNoLabel : ''}`;
+  const errorClasses = `${feedback} ${labelRootError} ${labelText === undefined ? feedbackNoLabel : ''} ${inputProps !== undefined && inputProps.endAdornment !== undefined ? feedbackAdorment : ''}`;
+  const inputClass = `${input} ${rtlActive ? inputRTL : ''} ${labelText === undefined ? inputNoLabel : ''}`;
   return (
     <FormControl
       {...formControlProps}
@@ -70,7 +67,7 @@ function CustomInput({ ...props }) {
     >
       {labelText !== undefined ? (
         <InputLabel
-          className={classes.labelRoot + labelClasses}
+          className={labelRoot + labelClasses}
           htmlFor={id}
           {...labelProps}
         >
@@ -79,8 +76,8 @@ function CustomInput({ ...props }) {
       ) : null}
       <Input
         classes={{
-          input,
-          disabled: classes.disabled,
+          input: inputClass,
+          disabled,
           underline: underlineClasses,
         }}
         id={id}
