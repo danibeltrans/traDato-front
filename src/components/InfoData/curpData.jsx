@@ -11,24 +11,24 @@ class CurpData extends Component {
     console.log(data);
     return (
       <InfoDataStyle>
-        <div className={`header ${data.status ? 'passed' : 'failed'}`}>
+        <div className={`header ${data.curp ? 'passed' : 'failed'}`}>
           {title}
         </div>
         <div className="contentdiv">
           {
-            data.status && (
+            data.curp && (
               <div>
                 <p>Datos</p>
-                <div><strong>Curp</strong>: { data.sipso.curp || 'No hay data' }</div>
-                <div><strong>Nombre</strong>: { data.sipso.name || 'No hay data' }</div>
-                <div><strong>Apellido</strong>: { data.sipso.lastName || 'No hay data' }</div>
-                <div><strong>Genero</strong>: { data.sipso.gender || 'No hay data' }</div>
-                <div><strong>birthday</strong>: { data.sipso.birthday || 'No hay data' }</div>
+                <div><strong>Curp</strong>: { data.curp || 'No hay data' }</div>
+                <div><strong>Nombre</strong>: { data.name || 'No hay data' }</div>
+                <div><strong>Apellido</strong>: { data.lastName || 'No hay data' }</div>
+                <div><strong>Genero</strong>: { data.gender || 'No hay data' }</div>
+                <div><strong>birthday</strong>: { data.birthday || 'No hay data' }</div>
               </div>
             )
           }
           {
-            !data.status && (
+            !data.curp && (
               <div>
                 <p>Error</p>
                 <div><strong>mensaje</strong>: { data.message }</div>

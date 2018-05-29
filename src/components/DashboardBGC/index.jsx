@@ -12,6 +12,7 @@ import Select from 'material-ui/Select';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import ContentCopy from '@material-ui/icons/ContentCopy';
 import Warning from '@material-ui/icons/Warning';
+import Check from '@material-ui/icons/Check';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as action from 'Actions';
@@ -66,7 +67,7 @@ class DashboardBGC extends Component {
   }
   render() {
     const { Data, judicialResult, document } = this.state;
-    const { classes = {}, sipso } = this.props;
+    const { classes = {}, sipso: { sipso = {} } } = this.props;
     return (
       <DashboardStyle>
         <div className="searchInputs">
@@ -131,12 +132,12 @@ class DashboardBGC extends Component {
                 <ItemGrid xs={12} sm={6} md={6} lg={3}>
                   <StatsCard
                     icon={ContentCopy}
-                    iconColor={sipso.status ? 'green' : 'red'}
+                    iconColor={sipso.curp ? 'green' : 'danger'}
                     title="Curp"
-                    description={sipso.status ? 'Success' : 'failed'}
-                    statIcon={Warning}
-                    statIconColor="danger"
-                    statText={sipso.status ? sipso.curp : 'failed'}
+                    description={sipso.curp ? 'Success' : 'failed'}
+                    statIcon={sipso.curp ? Check : Warning}
+                    statIconColor={sipso.curp ? 'green' : 'danger'}
+                    statText={sipso.curp ? sipso.curp : 'failed'}
                   />
                 </ItemGrid>
               )
