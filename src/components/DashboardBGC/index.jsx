@@ -80,6 +80,7 @@ class DashboardBGC extends Component {
             classes={{
               select: classes.select,
             }}
+            maxLength="2"
             value={document}
             onChange={this.handleSimple}
             inputProps={{
@@ -94,7 +95,7 @@ class DashboardBGC extends Component {
               }}
               value="1"
             >
-              Cedula de Ciudadania
+              CURP
             </MenuItem>
             <MenuItem
               classes={{

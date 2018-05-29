@@ -11,6 +11,7 @@ padding: 0 10px;
   align-items: center;
   > div{
     margin-right: 25px;
+    max-width: 250px;
   }
   .CustomInput-inputNoLabel-183{
     padding-top: 0;
