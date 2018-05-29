@@ -9,6 +9,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import ItemGrid from 'components/Grid/ItemGrid';
 import StatsCard from 'components/Cards/StatsCard';
 import Select from 'material-ui/Select';
+import withStyles from 'material-ui/styles/withStyles';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import ContentCopy from '@material-ui/icons/ContentCopy';
 import Warning from '@material-ui/icons/Warning';
@@ -16,6 +17,7 @@ import Check from '@material-ui/icons/Check';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as action from 'Actions';
+import extendedFormsStyle from 'assets/jss/material-dashboard-pro-react/views/extendedFormsStyle';
 import DashboardStyle from './style';
 
 class DashboardBGC extends Component {
@@ -180,5 +182,5 @@ const MapDispatchToProps = dispatch => ({
   getSIPSOInfo: bindActionCreators(action.getSIPSOInfo, dispatch),
 });
 
-export default connect(MapStateToProps, MapDispatchToProps)(DashboardBGC);
+export default withStyles(extendedFormsStyle)(connect(MapStateToProps, MapDispatchToProps)(DashboardBGC));
 
