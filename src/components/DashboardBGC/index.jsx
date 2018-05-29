@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import Select from 'material-ui/Select';
-import MenuItem from 'material-ui/Menu/MenuItem';
 import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 import Card from 'components/Card';
 import InfoData from 'components/InfoData';
 import constant from 'Constants';
+import GridContainer from 'components/Grid/GridContainer';
+import ItemGrid from 'components/Grid/ItemGrid';
+import StatsCard from 'components/Cards/StatsCard';
+import Select from 'material-ui/Select';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import ContentCopy from '@material-ui/icons/ContentCopy';
+import Store from '@material-ui/icons/Store';
+import Warning from '@material-ui/icons/Warning';
+import DateRange from '@material-ui/icons/DateRange';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as action from 'Actions';
 import DashboardStyle from './style';
 
-class Dashboard extends Component {
+class DashboardBGC extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,12 +45,14 @@ class Dashboard extends Component {
     const { API_URL } = constant;
     // judicialResult
     const { occurrence, Data = {} } = this.state;
+    const { getSIPSOInfo } = this.props;
     const config = {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     };
+    getSIPSOInfo(occurrence);
     const url = `${API_URL}mock/query/${occurrence}`;
     fetch(url, config)
       .then(resp => resp.json())
@@ -89,7 +101,7 @@ class Dashboard extends Component {
               }}
               value="2"
             >
-              edula de Extranjeria
+              Cedula de Extranjeria
             </MenuItem>
             <MenuItem
               classes={{
@@ -105,6 +117,7 @@ class Dashboard extends Component {
             id="regular"
             inputProps={{
               placeholder: 'Document',
+              onChange: e => this.setState({ occurrence: e.target.value }),
             }}
             formControlProps={{
               fullWidth: true,
@@ -113,6 +126,30 @@ class Dashboard extends Component {
           <Button color="primary" round onClick={this.searchById}>Search</Button>
         </div>
         <div>
+          <GridContainer>
+            <ItemGrid xs={12} sm={6} md={6} lg={3}>
+              <StatsCard
+                icon={ContentCopy}
+                iconColor="orange"
+                title="Used Space"
+                description="49/50"
+                small="GB"
+                statIcon={Warning}
+                statIconColor="danger"
+                statText="Last 24 Hours"
+              />
+            </ItemGrid>
+            <ItemGrid xs={12} sm={6} md={6} lg={3}>
+              <StatsCard
+                icon={Store}
+                iconColor="green"
+                title="Revenue"
+                description="$34,245"
+                statIcon={DateRange}
+                statText="Last 24 Hours"
+              />
+            </ItemGrid>
+          </GridContainer>
           {
             judicialResult && (
               <div>
@@ -138,5 +175,12 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const MapStateToProps = state => ({
+  sipso: state.sipso,
+});
+const MapDispatchToProps = dispatch => ({
+  getSIPSOInfo: bindActionCreators(action.getSIPSOInfo, dispatch),
+});
+
+export default connect(MapStateToProps, MapDispatchToProps)(DashboardBGC);
 

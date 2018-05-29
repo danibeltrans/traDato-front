@@ -57,7 +57,6 @@ class Sidebar extends Component {
     const links = (
       <List className={classes.list}>
         {routes.map((prop) => {
-          console.log(prop.redirect);
           if (prop.redirect) {
             return null;
           }

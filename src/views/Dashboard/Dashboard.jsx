@@ -1,54 +1,46 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+import ChartistGraph from 'react-chartist';
 
 // material-ui components
-import withStyles from "material-ui/styles/withStyles";
-import Tooltip from "material-ui/Tooltip";
+import withStyles from 'material-ui/styles/withStyles';
+import Tooltip from 'material-ui/Tooltip';
 
 // @material-ui/icons
-import ContentCopy from "@material-ui/icons/ContentCopy";
-import Store from "@material-ui/icons/Store";
-import InfoOutline from "@material-ui/icons/InfoOutline";
-import Warning from "@material-ui/icons/Warning";
-import DateRange from "@material-ui/icons/DateRange";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-import Update from "@material-ui/icons/Update";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
-import Accessibility from "@material-ui/icons/Accessibility";
-import Refresh from "@material-ui/icons/Refresh";
-import Edit from "@material-ui/icons/Edit";
-import Place from "@material-ui/icons/Place";
-import ArtTrack from "@material-ui/icons/ArtTrack";
+import ContentCopy from '@material-ui/icons/ContentCopy';
+import Store from '@material-ui/icons/Store';
+import InfoOutline from '@material-ui/icons/InfoOutline';
+import Warning from '@material-ui/icons/Warning';
+import DateRange from '@material-ui/icons/DateRange';
+import LocalOffer from '@material-ui/icons/LocalOffer';
+import Update from '@material-ui/icons/Update';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import AccessTime from '@material-ui/icons/AccessTime';
+import Accessibility from '@material-ui/icons/Accessibility';
+import Refresh from '@material-ui/icons/Refresh';
+import Edit from '@material-ui/icons/Edit';
+import Place from '@material-ui/icons/Place';
+import ArtTrack from '@material-ui/icons/ArtTrack';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import ItemGrid from "components/Grid/ItemGrid.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import StatsCard from "components/Cards/StatsCard.jsx";
-import ChartCard from "components/Cards/ChartCard.jsx";
-import ImagePriceCard from "components/Cards/ImagePriceCard.jsx";
+import GridContainer from 'components/Grid/GridContainer';
+import ItemGrid from 'components/Grid/ItemGrid';
+import Button from 'components/CustomButtons/Button';
+import StatsCard from 'components/Cards/StatsCard';
+import ChartCard from 'components/Cards/ChartCard';
+import ImagePriceCard from 'components/Cards/ImagePriceCard';
 
-import {
-  dailySalesChart,
-} from "variables/charts";
+import { dailySalesChart } from 'variables/charts';
 
-import dashboardStyle from "assets/jss/material-dashboard-pro-react/views/dashboardStyle";
+import dashboardStyle from 'assets/jss/material-dashboard-pro-react/views/dashboardStyle';
 
-import priceImage1 from "assets/img/card-2.jpeg";
+import priceImage1 from 'assets/img/card-2.jpeg';
 
 class Dashboard extends React.Component {
-  state = {
-    value: 0
-  };
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-  handleChangeIndex = index => {
-    this.setState({ value: index });
-  };
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -63,7 +55,7 @@ class Dashboard extends React.Component {
               small="GB"
               statIcon={Warning}
               statIconColor="danger"
-              statLink={{ text: "Get More Space...", href: "#pablo" }}
+              statLink={{ text: 'Get More Space...', href: '#pablo' }}
             />
           </ItemGrid>
           <ItemGrid xs={12} sm={6} md={6} lg={3}>
@@ -140,7 +132,7 @@ class Dashboard extends React.Component {
                 <span>
                   <span className={classes.successText}>
                     <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                  </span>{" "}
+                  </span>{' '}
                   increase in today sales.
                 </span>
               }
@@ -198,9 +190,5 @@ class Dashboard extends React.Component {
     );
   }
 }
-
-Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(dashboardStyle)(Dashboard);
