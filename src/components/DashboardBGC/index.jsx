@@ -3,6 +3,7 @@ import CustomInput from 'components/CustomInput/CustomInput';
 import Button from 'components/CustomButtons/Button';
 import Card from 'components/Card';
 import InfoData from 'components/InfoData';
+import CurpData from 'components/InfoData/curpData';
 import constant from 'Constants';
 import GridContainer from 'components/Grid/GridContainer';
 import ItemGrid from 'components/Grid/ItemGrid';
@@ -10,9 +11,7 @@ import StatsCard from 'components/Cards/StatsCard';
 import Select from 'material-ui/Select';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import ContentCopy from '@material-ui/icons/ContentCopy';
-import Store from '@material-ui/icons/Store';
 import Warning from '@material-ui/icons/Warning';
-import DateRange from '@material-ui/icons/DateRange';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as action from 'Actions';
@@ -46,13 +45,13 @@ class DashboardBGC extends Component {
     // judicialResult
     const { occurrence, Data = {} } = this.state;
     const { getSIPSOInfo } = this.props;
+    getSIPSOInfo(occurrence);
     const config = {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     };
-    getSIPSOInfo(occurrence);
     const url = `${API_URL}mock/query/${occurrence}`;
     fetch(url, config)
       .then(resp => resp.json())
@@ -67,7 +66,7 @@ class DashboardBGC extends Component {
   }
   render() {
     const { Data, judicialResult, document } = this.state;
-    const { classes = {} } = this.props;
+    const { classes = {}, sipso } = this.props;
     return (
       <DashboardStyle>
         <div className="searchInputs">
@@ -127,28 +126,21 @@ class DashboardBGC extends Component {
         </div>
         <div>
           <GridContainer>
-            <ItemGrid xs={12} sm={6} md={6} lg={3}>
-              <StatsCard
-                icon={ContentCopy}
-                iconColor="orange"
-                title="Used Space"
-                description="49/50"
-                small="GB"
-                statIcon={Warning}
-                statIconColor="danger"
-                statText="Last 24 Hours"
-              />
-            </ItemGrid>
-            <ItemGrid xs={12} sm={6} md={6} lg={3}>
-              <StatsCard
-                icon={Store}
-                iconColor="green"
-                title="Revenue"
-                description="$34,245"
-                statIcon={DateRange}
-                statText="Last 24 Hours"
-              />
-            </ItemGrid>
+            {
+              Object.keys(sipso).length !== 0 && (
+                <ItemGrid xs={12} sm={6} md={6} lg={3}>
+                  <StatsCard
+                    icon={ContentCopy}
+                    iconColor={sipso.status ? 'green' : 'red'}
+                    title="Curp"
+                    description={sipso.status ? 'Success' : 'failed'}
+                    statIcon={Warning}
+                    statIconColor="danger"
+                    statText={sipso.status ? sipso.curp : 'failed'}
+                  />
+                </ItemGrid>
+              )
+            }
           </GridContainer>
           {
             judicialResult && (
@@ -159,6 +151,11 @@ class DashboardBGC extends Component {
             )
           }
         </div>
+        {
+          Object.keys(sipso).length !== 0 && (
+            <CurpData data={sipso} title="Sipso" />
+          )
+        }
         <div>
           {
             judicialResult && (
